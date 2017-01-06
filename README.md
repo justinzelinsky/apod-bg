@@ -13,7 +13,7 @@ Install Node Packages
 
 Run
 
-```npm start```
+```node index.js```
 
 ## Purpose
 
