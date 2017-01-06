@@ -3,7 +3,17 @@
 ## Requirements
 
 * NodeJS
-* OS X
+* macOS
+
+## How to use
+
+Install Node Packages
+
+```npm install```
+
+Run
+
+```npm start```
 
 ## Purpose
 

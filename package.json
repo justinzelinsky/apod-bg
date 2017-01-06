@@ -1,13 +1,13 @@
 {
   "name": "apod-bg",
   "version": "1.0.0",
-  "description": "Chooses a random Astronomy Picture of the Day and makes it the desktop background on OS X",
+  "description": "Chooses a random Astronomy Picture of the Day and makes it the desktop background on macOS",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Justin Zelinsky",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "node-osascript": "^1.0.4",
     "request": "^2.72.0"
