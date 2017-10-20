@@ -7,12 +7,6 @@
 
 ## How to use
 
-Install Node Packages
-
-```npm install```
-
-Run
-
 ```node index.js```
 
 ## Purpose
@@ -21,4 +15,4 @@ Randomly chooses a photo from [Astronomy Picture of the Day](http://apod.nasa.go
 
 ## Warning
 
-I am totally using the public API key which probably has limits on requests. I should probably change that.
+Obtain an API key from the APOD website and set it as an environment variable `APOD_API_KEY`
