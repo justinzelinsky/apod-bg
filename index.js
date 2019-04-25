@@ -12,15 +12,21 @@ const apodUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&hd=true&d
 
 const setDesktopWallpaper = async () => {
   const apodResponse = await fetch(apodUrl);
-  const { hdurl } = await apodResponse.json();
+  const { hdurl, error, title } = await apodResponse.json();
+  if (error) {
+    console.log(error.message);
+  } else {
+    const fileName = hdurl.slice(hdurl.lastIndexOf('/') + 1);
+    const fileLocation = `/tmp/${fileName}`;
+    const fileDestination = fs.createWriteStream(fileLocation);
 
-  const fileName = hdurl.slice(hdurl.lastIndexOf('/') + 1);
-  const fileLocation = `/tmp/${fileName}`;
-  const fileDestination = fs.createWriteStream(fileLocation);
-
-  const fileResponse = await fetch(hdurl);
-  fileResponse.body.pipe(fileDestination);
-  fileDestination.on('finish', () => wallpaper.set(fileLocation));
+    const fileResponse = await fetch(hdurl);
+    fileResponse.body.pipe(fileDestination);
+    fileDestination.on('finish', () => {
+      console.log(`Background set to ${title}!`);
+      wallpaper.set(fileLocation);
+    });
+  }
 };
 
 setDesktopWallpaper();
