@@ -2,12 +2,11 @@
 
 ## Requirements
 
-* NodeJS
-* macOS
+- NodeJS
 
 ## How to use
 
-```node index.js```
+`npm start`
 
 ## Purpose
 
