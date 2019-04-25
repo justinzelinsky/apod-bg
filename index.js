@@ -1,6 +1,6 @@
-const fs = require("fs");
-const fetch = require("node-fetch");
-const wallpaper = require("wallpaper");
+const fs = require('fs');
+const fetch = require('node-fetch');
+const wallpaper = require('wallpaper');
 
 const apiKey = process.env.APOD_API_KEY;
 const start = new Date(1995, 5, 16).getTime(); // First APOD
@@ -14,13 +14,13 @@ const setDesktopWallpaper = async () => {
   const apodResponse = await fetch(apodUrl);
   const { hdurl } = await apodResponse.json();
 
-  const fileName = hdurl.slice(hdurl.lastIndexOf("/") + 1);
+  const fileName = hdurl.slice(hdurl.lastIndexOf('/') + 1);
   const fileLocation = `/tmp/${fileName}`;
+  const fileDestination = fs.createWriteStream(fileLocation);
 
   const fileResponse = await fetch(hdurl);
-  const dest = fs.createWriteStream(fileLocation);
-  fileResponse.body.pipe(dest);
-  dest.on("finish", () => wallpaper.set(fileLocation));
+  fileResponse.body.pipe(fileDestination);
+  fileDestination.on('finish', () => wallpaper.set(fileLocation));
 };
 
 setDesktopWallpaper();
