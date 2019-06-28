@@ -1,6 +1,6 @@
-const fs = require('fs');
-const fetch = require('node-fetch');
-const wallpaper = require('wallpaper');
+import fs from 'fs';
+import fetch from 'node-fetch';
+import wallpaper from 'wallpaper';
 
 const apiKey = process.env.APOD_API_KEY;
 const start = new Date(1995, 5, 16).getTime(); // First APOD
