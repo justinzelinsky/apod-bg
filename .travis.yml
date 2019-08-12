@@ -3,7 +3,9 @@ node_js:
   - "11.2"
 os:
   - osx
+before_install:
+  - mkdir ~/Pictures
 install:
-- npm install
+  - npm install
 script:
-- npm test
+  - npm test
