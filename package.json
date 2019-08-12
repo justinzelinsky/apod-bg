@@ -1,7 +1,7 @@
 {
   "name": "apod-bg",
   "version": "4.0.0",
-  "description": "Chooses a random Astronomy Picture of the Day and makes it the desktop background",
+  "description": "Choose a random Astronomy Picture of the Day and make it the desktop background",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
