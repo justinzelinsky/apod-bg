@@ -2,15 +2,21 @@
   "name": "apod-bg",
   "version": "4.0.0",
   "description": "Chooses a random Astronomy Picture of the Day and makes it the desktop background",
-  "main": "index.js",
-  "type": "module",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node --experimental-modules index.js"
+    "start": "node src/index.js",
+    "test": "jest --detectOpenHandles"
   },
   "author": "Justin Zelinsky",
   "license": "MIT",
   "dependencies": {
+    "dayjs": "^1.8.15",
+    "meow": "^5.0.0",
     "node-fetch": "^2.3.0",
     "wallpaper": "^4.4.0"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0",
+    "spawn-command": "0.0.2-1"
   }
 }

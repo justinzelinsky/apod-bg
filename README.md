@@ -4,9 +4,13 @@
 
 - NodeJS
 
+## Install
+
+`npm install -g apod-bg`
+
 ## How to use
 
-`npm start`
+`apod-bg` (`apod-bg --help` for options)
 
 ## Purpose
 
