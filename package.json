@@ -7,7 +7,16 @@
     "start": "node src/index.js",
     "test": "jest --detectOpenHandles"
   },
+  "keywords": [
+    "apod",
+    "astronomy picture of the day",
+    "wallpaper"
+  ],
   "author": "Justin Zelinsky",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/justinzelinsky/apod-bg.git"
+  },
   "license": "MIT",
   "dependencies": {
     "dayjs": "^1.8.15",
