@@ -1,8 +1,6 @@
 const path = require('path');
 const spawn = require('spawn-command');
-
 const pjson = require('../package.json');
-
 const APOD_BG_PATH = require.resolve('../src/index');
 
 const SUCCESS_TEXT_REGEX = /^Background image saved to (.*) and set to (.*)!$/;
