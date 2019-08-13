@@ -1,4 +1,4 @@
-# Astronomy Picture of the Day desktop background
+# apod-bg
 
 [![npm](https://img.shields.io/npm/v/apod-bg.svg)](https://www.npmjs.com/package/apod-bg)
 [![npm bundle size](https://img.shields.io/bundlephobia/min/apod-bg)](https://bundlephobia.com/result?p=apod-bg)
@@ -25,4 +25,4 @@ Randomly chooses a photo from [Astronomy Picture of the Day](http://apod.nasa.go
 
 ## Warning
 
-Obtain an API key from the APOD website and set it as an environment variable `APOD_API_KEY`
+Obtain an API key from the APOD website and set it as an environment variable `APOD_API_KEY` or use `--apiKey`
