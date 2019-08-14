@@ -10,6 +10,7 @@ const lastApodDate = dayjs();
 const setDesktopWallpaper = async ({
   apiKey,
   endDate,
+  hd,
   location,
   startDate
 }) => {
@@ -41,7 +42,7 @@ const setDesktopWallpaper = async ({
     startTime + Math.random() * (endTime - startTime)
   ).format('YYYY-MM-DD');
 
-  const apodUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&hd=true&date=${randomDate}`;
+  const apodUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&hd=${hd}&date=${randomDate}`;
 
   const apodResponse = await fetch(apodUrl);
   const { hdurl, error, title } = await apodResponse.json();
