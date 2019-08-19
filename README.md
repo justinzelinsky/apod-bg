@@ -16,12 +16,29 @@
 
 ## How to use
 
-`apod-bg` (`apod-bg --help` for options)
+`apod-bg`
+
+## Options
+
+- `--apiKey <apiKey>`, `-k <apiKey>`
+  - Use specific API key -- can also set `APOD_API_KEY` as an environment variable
+- `--endDate <mm/dd/yyyy>`
+  - Specify the last possible date you want the picture chosen from (default `today`)
+- `--hd <true|false>`
+  - Specify whether or not you want the image in HD or not (default: `true`)
+- `--help`
+  - Display information about possible options
+- `--location <path/to/save/file>`
+  - Specify the location where you want to save the file (default: `/tmp`)
+- `--startDate <mm/dd/yyyy>`
+  - Specify the first possible date you want the picture randomly chosen from (default: `05/16/1995`)
+- `--version`
+  - Display the current version of the application
 
 ## Purpose
 
 Randomly chooses a photo from [Astronomy Picture of the Day](http://apod.nasa.gov/apod/astropix.html) and sets it as your desktop background
 
-## Warning
+## APOD API Key
 
-Obtain an API key from the APOD website and set it as an environment variable `APOD_API_KEY` or use `--apiKey`
+Obtain an API key from the APOD website and set it as an environment variable `APOD_API_KEY` or use `--apiKey` flag.
