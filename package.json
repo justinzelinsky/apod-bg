@@ -10,7 +10,8 @@
   "keywords": [
     "apod",
     "astronomy picture of the day",
-    "wallpaper"
+    "wallpaper",
+    "cli"
   ],
   "author": "Justin Zelinsky",
   "repository": {
@@ -21,7 +22,6 @@
   "dependencies": {
     "dayjs": "^1.8.15",
     "meow": "^5.0.0",
-    "node-fetch": "^2.3.0",
     "wallpaper": "^4.4.0"
   },
   "devDependencies": {

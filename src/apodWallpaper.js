@@ -1,6 +1,6 @@
 const dayjs = require('dayjs');
-const fetch = require('node-fetch');
 const fs = require('fs');
+const https = require('https');
 const path = require('path');
 const wallpaper = require('wallpaper');
 
@@ -44,29 +44,49 @@ const setDesktopWallpaper = async ({
 
   const apodUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&hd=${hd}&date=${randomDate}`;
 
-  const apodResponse = await fetch(apodUrl);
-  const { hdurl, error, title } = await apodResponse.json();
-  if (error) {
-    console.error(`Error retrieving image: ${error.message}`);
-  } else {
-    const fileResponse = await fetch(hdurl);
-    const fileName = hdurl.slice(hdurl.lastIndexOf('/') + 1);
-    const fileLocation = path.join(location, fileName);
-    const fileDestination = fs.createWriteStream(fileLocation);
+  https.get(apodUrl, res => {
+    res.setEncoding('utf8');
+    let body = '';
 
-    fileDestination.on('error', error => {
-      console.error(`Error saving image: ${error}`);
+    res.on('data', data => {
+      body += data;
     });
 
-    fileResponse.body.pipe(fileDestination);
-
-    fileDestination.on('finish', () => {
-      console.log(
-        `Background image saved to ${fileLocation} and set to ${title}!`
-      );
-      wallpaper.set(fileLocation);
+    res.on('error', err => {
+      console.error(`Error retrieving image: ${err.message}`);
     });
-  }
+
+    res.on('end', () => {
+      body = JSON.parse(body);
+      handleApodResponse(body);
+    });
+  });
+
+  const handleApodResponse = apodResponse => {
+    if (apodResponse.error) {
+      console.error(`Error retrieving image: ${error.message}`);
+    } else {
+      const { hdurl, title } = apodResponse;
+      https.get(hdurl, res => {
+        const fileName = hdurl.slice(hdurl.lastIndexOf('/') + 1);
+        const fileLocation = path.join(location, fileName);
+        const fileDestination = fs.createWriteStream(fileLocation);
+
+        fileDestination.on('error', error => {
+          console.error(`Error saving image: ${error}`);
+        });
+
+        fileDestination.on('finish', () => {
+          console.log(
+            `Background image saved to ${fileLocation} and set to ${title}!`
+          );
+          wallpaper.set(fileLocation);
+        });
+
+        res.pipe(fileDestination);
+      });
+    }
+  };
 };
 
 module.exports = {
