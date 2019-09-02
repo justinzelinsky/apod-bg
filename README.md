@@ -2,6 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/apod-bg.svg)](https://www.npmjs.com/package/apod-bg)
 [![Build Status](https://travis-ci.org/justinzelinsky/apod-bg.svg?branch=master)](https://travis-ci.org/justinzelinsky/apod-bg)
+![David](https://img.shields.io/david/justinzelinsky/apod-bg)
 ![npm](https://img.shields.io/npm/dm/apod-bg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
