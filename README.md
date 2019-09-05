@@ -22,8 +22,8 @@
 ## Options
 
 - `--apiKey <apiKey>`, `-k <apiKey>`
-  - Use specific API key -- can also set `APOD_API_KEY` as an environment variable
-- `--endDate <mm/dd/yyyy>`
+  - Use specific API key -- can set `APOD_API_KEY` as an environment variable
+- `--endDate <YYYY-MM-DD>`
   - Specify the last possible date you want the picture chosen from (default `today`)
 - `--hd <true|false>`
   - Specify whether or not you want the image in HD or not (default: `true`)
@@ -31,8 +31,8 @@
   - Display information about possible options
 - `--location <path/to/save/file>`
   - Specify the location where you want to save the file (default: `/tmp`)
-- `--startDate <mm/dd/yyyy>`
-  - Specify the first possible date you want the picture randomly chosen from (default: `05/16/1995`)
+- `--startDate <YYYY-MM-DD>`
+  - Specify the first possible date you want the picture randomly chosen from (default: `1995-05-16`)
 - `--version`
   - Display the current version of the application
 

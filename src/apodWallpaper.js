@@ -1,11 +1,22 @@
-const dayjs = require('dayjs');
 const fs = require('fs');
 const https = require('https');
 const path = require('path');
 const wallpaper = require('wallpaper');
 
-const firstApodDate = dayjs('05/16/1995');
-const lastApodDate = dayjs();
+const firstApodDate = new Date('1995-05-16');
+const lastApodDate = new Date();
+
+const formatDate = date => {
+  const year = date.getUTCFullYear();
+
+  let month = (1 + date.getUTCMonth()).toString();
+  month = month.length > 1 ? month : '0' + month;
+
+  let day = date.getUTCDate().toString();
+  day = day.length > 1 ? day : '0' + day;
+
+  return `${year}-${month}-${day}`;
+};
 
 const setDesktopWallpaper = async ({
   apiKey,
@@ -19,28 +30,28 @@ const setDesktopWallpaper = async ({
     return;
   }
 
-  const start = dayjs(startDate);
-  if (start.isBefore(firstApodDate)) {
+  const start = new Date(startDate);
+  if (start < firstApodDate) {
     console.error(
-      `Invalid start date ${startDate} supplied. Please use a date in the format MM/DD/YYYY that is not before 05/16/1995.`
+      `Invalid start date ${startDate} supplied. Please use a date in the format YYYY-MM-DD that is not before 1995-05-16`
     );
     return;
   }
 
-  const end = dayjs(endDate);
-  if (end.isAfter(lastApodDate)) {
+  const end = new Date(endDate);
+  if (end > lastApodDate) {
     console.error(
-      `Invalid end date ${endDate} supplied. Please use a date in the format MM/DD/YYYY that is not after today.`
+      `Invalid end date ${endDate} supplied. Please use a date in the format YYYY-MM-DD that is not after today.`
     );
     return;
   }
 
-  const startTime = start.valueOf();
-  const endTime = end.valueOf();
+  const startTime = start.getTime();
+  const endTime = end.getTime();
 
-  const randomDate = dayjs(
-    startTime + Math.random() * (endTime - startTime)
-  ).format('YYYY-MM-DD');
+  const randomDate = formatDate(
+    new Date(startTime + Math.random() * (endTime - startTime))
+  );
 
   const apodUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&hd=${hd}&date=${randomDate}`;
 
@@ -67,30 +78,29 @@ const setDesktopWallpaper = async ({
       console.error(`Error retrieving image: ${error.message}`);
     } else {
       const { hdurl, title } = apodResponse;
-      https.get(hdurl, res => {
-        const fileName = hdurl.slice(hdurl.lastIndexOf('/') + 1);
-        const fileLocation = path.join(location, fileName);
-        const fileDestination = fs.createWriteStream(fileLocation);
 
-        fileDestination.on('error', error => {
-          console.error(`Error saving image: ${error}`);
-        });
+      const fileName = hdurl.slice(hdurl.lastIndexOf('/') + 1);
+      const fileLocation = path.join(location, fileName);
+      const fileDestination = fs.createWriteStream(fileLocation);
 
-        fileDestination.on('finish', () => {
-          console.log(
-            `Background image saved to ${fileLocation} and set to ${title}!`
-          );
-          wallpaper.set(fileLocation);
-        });
-
-        res.pipe(fileDestination);
+      fileDestination.on('error', error => {
+        console.error(`Error saving image: ${error}`);
       });
+
+      fileDestination.on('finish', () => {
+        console.log(
+          `Background image saved to ${fileLocation} and set to ${title}!`
+        );
+        wallpaper.set(fileLocation);
+      });
+
+      https.get(hdurl, res => res.pipe(fileDestination));
     }
   };
 };
 
 module.exports = {
-  firstApodDate,
-  lastApodDate,
+  firstApodDate: formatDate(firstApodDate),
+  lastApodDate: formatDate(lastApodDate),
   setDesktopWallpaper
 };

@@ -17,13 +17,13 @@ const cli = meow(
       --apiKey, -k       APOD Api Key (also can specify as an environment variable named APOD_API_KEY)
       --hd               Enable HD (default true)
       --location,        Directory to save image (default /tmp/)
-      --endDate,         End Date in MM/DD/YYYY format (default - today) Note: Must not be after today
-      --startDate,       Start Date in MM/DD/YYYY format (default - 05/16/1995) Note: Must not be before 05/16/1991
+      --endDate,         End Date in YYYY-MM-DD format (default - today) Note: Must not be after today
+      --startDate,       Start Date in YYYY-MM-DD format (default - 1995-05-16) Note: Must not be before 1995-05-16
       --version          Display current version
 
     Examples
       $ apod-bg
-      $ apod-bg --startDate 01/01/2000 --endDate 10/10/2010
+      $ apod-bg --startDate 2000-01-01 --endDate 2010-10-10
       $ apod-bg --location ~/Pictures
 `,
   {
@@ -39,11 +39,11 @@ const cli = meow(
       },
       startDate: {
         type: 'string',
-        default: firstApodDate.format('MM/DD/YYYY')
+        default: firstApodDate
       },
       endDate: {
         type: 'string',
-        default: lastApodDate.format('MM/DD/YYYY')
+        default: lastApodDate
       },
       location: {
         type: 'string',
