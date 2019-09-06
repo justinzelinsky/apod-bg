@@ -3,20 +3,10 @@ const https = require('https');
 const path = require('path');
 const wallpaper = require('wallpaper');
 
+const { formatDate } = require('./utils');
+
 const firstApodDate = new Date('1995-05-16');
 const lastApodDate = new Date();
-
-const formatDate = date => {
-  const year = date.getUTCFullYear();
-
-  let month = (1 + date.getUTCMonth()).toString();
-  month = month.length > 1 ? month : '0' + month;
-
-  let day = date.getUTCDate().toString();
-  day = day.length > 1 ? day : '0' + day;
-
-  return `${year}-${month}-${day}`;
-};
 
 const setDesktopWallpaper = async ({
   apiKey,
@@ -75,7 +65,7 @@ const setDesktopWallpaper = async ({
 
   const handleApodResponse = apodResponse => {
     if (apodResponse.error) {
-      console.error(`Error retrieving image: ${error.message}`);
+      console.error(`Error retrieving image: ${apodResponse.error.message}`);
     } else {
       const { hdurl, title } = apodResponse;
 
