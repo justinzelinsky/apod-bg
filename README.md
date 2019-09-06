@@ -1,7 +1,7 @@
 # apod-bg
 
 [![npm](https://img.shields.io/npm/v/apod-bg.svg)](https://www.npmjs.com/package/apod-bg)
-[![Build Status](https://travis-ci.org/justinzelinsky/apod-bg.svg?branch=master)](https://travis-ci.org/justinzelinsky/apod-bg)
+[![Build Status](https://travis-ci.com/justinzelinsky/apod-bg.svg?branch=master)](https://travis-ci.com/justinzelinsky/apod-bg)
 ![David](https://img.shields.io/david/justinzelinsky/apod-bg)
 ![npm](https://img.shields.io/npm/dm/apod-bg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
