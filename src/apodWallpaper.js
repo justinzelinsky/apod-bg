@@ -3,7 +3,17 @@ const https = require('https');
 const path = require('path');
 const wallpaper = require('wallpaper');
 
-const { formatDate } = require('./utils');
+const formatDate = date => {
+  const year = date.getUTCFullYear();
+
+  let month = (1 + date.getUTCMonth()).toString();
+  month = month.length > 1 ? month : '0' + month;
+
+  let day = date.getUTCDate().toString();
+  day = day.length > 1 ? day : '0' + day;
+
+  return `${year}-${month}-${day}`;
+};
 
 const firstApodDate = new Date('1995-05-16');
 const lastApodDate = new Date();
@@ -89,8 +99,12 @@ const setDesktopWallpaper = async ({
   };
 };
 
+const defaultEndDate = formatDate(lastApodDate);
+const defaultStartDate = formatDate(firstApodDate);
+
 module.exports = {
-  firstApodDate: formatDate(firstApodDate),
-  lastApodDate: formatDate(lastApodDate),
+  defaultEndDate,
+  defaultStartDate,
+  formatDate,
   setDesktopWallpaper
 };

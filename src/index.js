@@ -3,8 +3,8 @@
 
 const meow = require('meow');
 const {
-  firstApodDate,
-  lastApodDate,
+  defaultEndDate,
+  defaultStartDate,
   setDesktopWallpaper
 } = require('./apodWallpaper');
 
@@ -39,11 +39,11 @@ const cli = meow(
       },
       startDate: {
         type: 'string',
-        default: firstApodDate
+        default: defaultStartDate
       },
       endDate: {
         type: 'string',
-        default: lastApodDate
+        default: defaultEndDate
       },
       location: {
         type: 'string',

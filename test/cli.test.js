@@ -1,7 +1,7 @@
 const execa = require('execa');
 const path = require('path');
 
-const { formatDate } = require('../src/utils');
+const { formatDate } = require('../src/apodWallpaper');
 const pkg = require('../package.json');
 
 const SUCCESS_TEXT_REGEX = /^Background image saved to (.*) and set to (.*)!$/;
