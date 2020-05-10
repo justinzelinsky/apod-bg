@@ -2,11 +2,8 @@
 'use strict';
 
 const meow = require('meow');
-const {
-  defaultEndDate,
-  defaultStartDate,
-  setDesktopWallpaper
-} = require('./apodWallpaper');
+const { setDesktopWallpaper } = require('./apodWallpaper');
+const { defaultEndDate, defaultStartDate } = require('./dates');
 
 const cli = meow(
   `
@@ -31,25 +28,25 @@ const cli = meow(
       apiKey: {
         type: 'string',
         alias: 'k',
-        default: process.env.APOD_API_KEY
+        default: process.env.APOD_API_KEY,
       },
       hd: {
         type: 'boolean',
-        default: true
+        default: true,
       },
       startDate: {
         type: 'string',
-        default: defaultStartDate
+        default: defaultStartDate,
       },
       endDate: {
         type: 'string',
-        default: defaultEndDate
+        default: defaultEndDate,
       },
       location: {
         type: 'string',
-        default: '/tmp/'
-      }
-    }
+        default: '/tmp/',
+      },
+    },
   }
 );
 

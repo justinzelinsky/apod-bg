@@ -1,7 +1,7 @@
 const execa = require('execa');
 const path = require('path');
 
-const { formatDate } = require('../src/apodWallpaper');
+const { formatDate } = require('../src/dates');
 const pkg = require('../package.json');
 
 const SUCCESS_TEXT_REGEX = /^Background image saved to (.*) and set to (.*)!$/;
@@ -25,7 +25,7 @@ test('Print Version: apod-bg --version', async () => {
 
 test('Missing API key: apod-bg', async () => {
   const { stderr, stdout } = await execa(bin, [], {
-    env: { APOD_API_KEY: '' }
+    env: { APOD_API_KEY: '' },
   });
   expect(stdout).toBeFalsy();
   expect(stderr).toEqual(MISSING_API_KEY);
@@ -33,7 +33,7 @@ test('Missing API key: apod-bg', async () => {
 
 test('Invalid API key: apod-bg', async () => {
   const { stderr, stdout } = await execa(bin, [], {
-    env: { APOD_API_KEY: 'foo' }
+    env: { APOD_API_KEY: 'foo' },
   });
   expect(stdout).toBeFalsy();
   expect(stderr).toEqual(INVALID_API_KEY);
