@@ -3,3 +3,4 @@ test
 .gitignore
 .prettierrc
 .DS_STORE
+.vscode
