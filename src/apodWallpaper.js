@@ -3,62 +3,49 @@ const https = require('https');
 const path = require('path');
 const wallpaper = require('wallpaper');
 const { getRandomDate } = require('./dates');
+const { get } = require('./get');
 
 async function setDesktopWallpaper(flags) {
-  const { apiKey, endDate, hd, location, startDate } = flags;
-
-  if (!apiKey) {
+  if (!flags.apiKey) {
     console.error('Missing API Key');
     return;
   }
+
+  const { apiKey, endDate, hd, location, startDate } = flags;
 
   const randomDate = getRandomDate(startDate, endDate);
 
   if (randomDate) {
     const apodUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&hd=${hd}&date=${randomDate}`;
 
-    https.get(apodUrl, function (res) {
-      res.setEncoding('utf8');
-      let body = '';
+    try {
+      const { hdurl, title, error } = await get(apodUrl);
 
-      res.on('data', (data) => (body += data));
+      if (error) {
+        console.error(`Error retrieving image: ${error.message}`);
+        return;
+      }
 
-      res.on('error', (err) =>
-        console.error(`Error retrieving image: ${err.message}`)
+      const fileName = hdurl.slice(hdurl.lastIndexOf('/') + 1);
+      const fileLocation = path.join(location, fileName);
+      const fileDestination = fs.createWriteStream(fileLocation);
+
+      fileDestination.on('error', (error) =>
+        console.error(`Error saving image: ${error}`)
       );
 
-      res.on('end', function () {
-        body = JSON.parse(body);
-        handleApodResponse(location, body);
+      fileDestination.on('finish', function () {
+        console.log(
+          `Background image saved to ${fileLocation} and set to ${title}!`
+        );
+        wallpaper.set(fileLocation);
       });
-    });
+
+      https.get(hdurl, (res) => res.pipe(fileDestination));
+    } catch({ error }) {
+      console.error(`Error retrieving image: ${error.message}`)
+    }
   }
-}
-
-function handleApodResponse(location, apodResponse) {
-  if (apodResponse.error) {
-    console.error(`Error retrieving image: ${apodResponse.error.message}`);
-    return;
-  }
-
-  const { hdurl, title } = apodResponse;
-
-  const fileName = hdurl.slice(hdurl.lastIndexOf('/') + 1);
-  const fileLocation = path.join(location, fileName);
-  const fileDestination = fs.createWriteStream(fileLocation);
-
-  fileDestination.on('error', (error) =>
-    console.error(`Error saving image: ${error}`)
-  );
-
-  fileDestination.on('finish', function () {
-    console.log(
-      `Background image saved to ${fileLocation} and set to ${title}!`
-    );
-    wallpaper.set(fileLocation);
-  });
-
-  https.get(hdurl, (res) => res.pipe(fileDestination));
 }
 
 module.exports = {

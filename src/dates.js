@@ -1,9 +1,6 @@
 const firstApodDate = new Date('1995-05-16');
 const lastApodDate = new Date();
 
-const defaultEndDate = formatDate(lastApodDate);
-const defaultStartDate = formatDate(firstApodDate);
-
 function formatDate(date) {
   const year = date.getUTCFullYear();
 
@@ -18,6 +15,7 @@ function formatDate(date) {
 
 function getRandomDate(startDate, endDate) {
   const start = new Date(startDate);
+
   if (start < firstApodDate) {
     console.error(
       `Invalid start date ${startDate} supplied. Please use a date in the format YYYY-MM-DD that is not before 1995-05-16`
@@ -26,6 +24,7 @@ function getRandomDate(startDate, endDate) {
   }
 
   const end = new Date(endDate);
+
   if (end > lastApodDate) {
     console.error(
       `Invalid end date ${endDate} supplied. Please use a date in the format YYYY-MM-DD that is not after today.`
@@ -42,6 +41,9 @@ function getRandomDate(startDate, endDate) {
 
   return randomDate;
 }
+
+const defaultEndDate = formatDate(lastApodDate);
+const defaultStartDate = formatDate(firstApodDate);
 
 module.exports = {
   defaultEndDate,
