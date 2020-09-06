@@ -31,14 +31,6 @@ test('Missing API key: apod-bg', async () => {
   expect(stderr).toEqual(MISSING_API_KEY);
 });
 
-test('Invalid API key: apod-bg', async () => {
-  const { stderr, stdout } = await execa(bin, [], {
-    env: { APOD_API_KEY: 'foo' },
-  });
-  expect(stdout).toBeFalsy();
-  expect(stderr).toEqual(INVALID_API_KEY);
-});
-
 test('Invalid Start Date: apod-bg --startDate 1995-05-15', async () => {
   const { stderr, stdout } = await execa(bin, ['--startDate', '1995-05-15']);
   expect(stdout).toBeFalsy();

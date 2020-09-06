@@ -42,8 +42,8 @@ async function setDesktopWallpaper(flags) {
       });
 
       https.get(hdurl, (res) => res.pipe(fileDestination));
-    } catch({ error }) {
-      console.error(`Error retrieving image: ${error.message}`)
+    } catch(error) {
+      console.error(`Error retrieving image: ${error.error.message}`)
     }
   }
 }
