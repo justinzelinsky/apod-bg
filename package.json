@@ -20,7 +20,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "meow": "^5.0.0",
+    "meow": "^7.1.1",
     "wallpaper": "^4.4.0"
   },
   "devDependencies": {
