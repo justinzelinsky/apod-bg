@@ -49,5 +49,5 @@ async function setDesktopWallpaper(flags) {
 }
 
 module.exports = {
-  setDesktopWallpaper,
+  setDesktopWallpaper
 };

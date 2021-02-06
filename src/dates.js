@@ -49,5 +49,5 @@ module.exports = {
   defaultEndDate,
   defaultStartDate,
   formatDate,
-  getRandomDate,
+  getRandomDate
 };
