@@ -1,5 +1,10 @@
 const { formatDate, getRandomDate } = require('../src/dates');
 
+const uvu = require('uvu');
+const assert = require('uvu/assert');
+
+const { test } = uvu;
+
 function getTomorrow() {
   const today = new Date();
   today.setDate(today.getDate() + 1);
@@ -7,14 +12,15 @@ function getTomorrow() {
 }
 
 test('formatDate', function() {
-  expect(formatDate(new Date('01/01/2020'))).toEqual('2020-01-01');
-  expect(formatDate(new Date('1/1/1990'))).toEqual('1990-01-01');
+  assert.equal(formatDate(new Date('01/01/2020')), '2020-01-01');
+  assert.equal(formatDate(new Date('1/1/1990')), '1990-01-01');
 });
 
 test('getRandomDate', function() {
   const tomorrow = getTomorrow();
 
-  expect(getRandomDate('01-01-2000', tomorrow)).toEqual(null);
-  expect(getRandomDate('01-01-1990', '01-01-2000')).toEqual(null);
-  expect(getRandomDate('01-01-2000', '01-01-2005')).toBeTruthy();
+  assert.equal(getRandomDate('01-01-2000', tomorrow), null);
+  assert.equal(getRandomDate('01-01-1990', '01-01-2000'), null);
 });
+
+test.run();
